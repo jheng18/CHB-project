@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Place Address Form</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link href="file:///C|/Users/hengj/Desktop/chb-web-design/form.css" rel="stylesheet" type="text/css">
+      <script>
+          {% if messages %}
+              <ul class="messages">
+              {% for message in messages %}
+                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+              </ul>
+          {% endif %}
+      </script>
+  </head>
+
+  <body>
+  <form action="map" method="get">
+		  <fieldset>
+			  <legend id='kuang'><h3>Find safe route</h3></legend>
+					<input id="autocomplete1" placeholder="Origin"
+						   type="text" name="origin" ></input><br>
+					<input id="autocomplete2" placeholder="Destination"
+                           type="text" name ="destination"></input><br>
+			  <p>Choose mode:</p>
+					<input type="radio" name="mode" value="WALKING" checked> Walk<br>
+					<input type="radio" name="mode" value="TRANSIT"> Transit<br>
+                    <input type="radio" name="mode" value="DRVING"> Drving<br>
+					<input type="radio" name="mode" value="BIKE"> Bike
+	  		  <p>Choose departure date:</p>
+	  				<select action="/example/html5/demo_form.asp" method="get">
+    				 <input type="date" name="user_date" />
+					</select>
+			  <p>Choose departure time:</p>
+	  				<select action="/example/html5/demo_form.asp" method="get">
+    				 <input type="time" name="user_time"/>
+					</select><br><br>
+	  		<input type="submit" value="Submit">
+	      </fieldset>
+
+	  </form>
+
+    <script>
+      var autocomplete1,autocomplete2;
+	  var defaultBounds = new google.maps.LatLngBounds(
+  			new google.maps.LatLng(41.78013 -87.615546),
+  			new google.maps.LatLng(41.809241, -87.575706));
+
+      var options = {bounds: defaultBounds, placeIdOnly: true};
+      function initAutocomplete() {
+        autocomplete1 = new google.maps.places.Autocomplete((document.getElementById('autocomplete1')),
+            options).setComponentRestrictions(
+            {'country': ['us']});
+		autocomplete2 = new google.maps.places.Autocomplete((document.getElementById('autocomplete2'))
+            ,options).setComponentRestrictions(
+            {'country': ['us']});;
+        autocomplete1.addListener('place_changed', function() {
+          var place1 = autocomplete1.getPlace();
+          if (!place1.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+		  }});
+		autocomplete2.addListener('place_changed', function() {
+          var place2 = autocomplete2.getPlace();
+          if (!place2.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return}});
+		autocomplete1.setBounds(defaultBounds);
+		autocomplete2.setBounds(defaultBounds);
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
+  </body>
+</html>
