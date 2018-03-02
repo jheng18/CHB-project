@@ -17,8 +17,9 @@ def map(request):
     origin = request.GET['origin']
     origin = check(origin)
     if not origin:
-        messages.error(request, "Error")
-        return render(request, 'route/index.html')
+        # messages.add_message(request, messages.ERROR,"Error")
+        messages.success(request, 'error')
+        return redirect('/route/')
         # messages.add_message(request, messages.INFO, 'Please enter valid place')
         # return HttpResponseRedirect('route/index.html')
         # return reverse('route:index', args=(self.kwargs['pk'],))
