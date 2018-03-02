@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # from utilies_dir import algorithm
 from django.contrib import messages
@@ -8,6 +9,7 @@ import datetime
 from django.urls import reverse
 from django import forms
 from django.contrib import messages
+
 from route.checkplace import *
 
 def index(request):
@@ -16,17 +18,14 @@ def index(request):
 def map(request):
     origin = request.GET['origin']
     origin = check(origin)
-    if not origin:
-        # messages.add_message(request, messages.ERROR,"Error")
-        messages.success(request, 'error')
-        return redirect('/route/')
-        # messages.add_message(request, messages.INFO, 'Please enter valid place')
-        # return HttpResponseRedirect('route/index.html')
-        # return reverse('route:index', args=(self.kwargs['pk'],))
-        # return render_to_response('route/index.html', message='Save complete')
-        # return render(request,'route/index/html')
+    # if not origin:
+    #     messages.error(request, 'error')
+    #     return render(request, 'route/index.html')
     destin = request.GET['destination']
-    destin = check(origin)
+    destin = check(destin)
+    if not destin or not origin:
+        messages.error(request, '2Error message here')
+        return HttpResponseRedirect( reverse('type') )
     mode = request.GET['mode']
     date = request.GET['user_date'].replace(":", ",")
     if not date:
@@ -34,5 +33,5 @@ def map(request):
     time = request.GET['user_time'].replace(":", ",")
     if not time:
         time = datetime.datetime.now().strftime('%H,%M')
-    return HttpResponse(origin)
-
+    # return render(request, 'route/map.html', {'form': form})
+    return render(request, 'route/map.html', context={"needall":[origin,destin,mode,date,time]})
