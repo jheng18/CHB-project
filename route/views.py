@@ -25,7 +25,7 @@ def map(request):
     destin = check(destin)
     if not destin or not origin:
         messages.error(request, '2Error message here')
-        return HttpResponseRedirect( reverse('type') )
+        return HttpResponseRedirect( reverse('route') )
     mode = request.GET['mode']
     date = request.GET['user_date'].replace(":", ",")
     if not date:
