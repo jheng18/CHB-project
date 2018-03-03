@@ -1,6 +1,0 @@
-<application>
-  <component name="GithubSettings">
-    <option name="HOST" value="https://github.com/jheng18/CHB_CS122_project.git" />
-    <option name="AUTH_TYPE" value="TOKEN" />
-  </component>
-</application>

@@ -1,94 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Travel modes in directions</title>
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
 
-    <div id="map"></div>
-    <script>
-      function initMap() {
+<div id="map"></div>
+<script>
+
+    {#var js_list = "{{needall|safe}}";#}
+    function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: {lat: 41.787163518, lng: -87.593164294}
+            zoom: 13,
+            center: {lat: 41.787163518, lng: -87.593164294}
         });
         directionsDisplay.setMap(map);
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
-      };
+    };
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
-          origin: '5835 S Kimbark Ave, Chicago, IL 60637, USA',
-          destination:  '5550 S University Ave, Chicago, IL 60637, USA',
-		  waypoints: [{
-     location:new google.maps.LatLng(41.7896259, -87.59479879999999),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7896259, -87.5957988),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7896259, -87.5967988),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7896259, -87.5977988),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7895879, -87.5980268),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7905879, -87.5980268),
-     stopover:true},{
-     location:new google.maps.LatLng(41.791587899999996, -87.5980268),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7932285, -87.59813009999999),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7932314, -87.59798789999999),
-     stopover:true},{
-     location:new google.maps.LatLng(41.7935885, -87.5979957),
-     stopover:true},{
-     location:new google.maps.LatLng(41.79358789999999, -87.5980268),
-     stopover:true},{
-     location:new google.maps.LatLng(41.79358819999999, -87.5981104),
-     stopover:true}],
-          travelMode:"WALKING",
+            origin: '{{ org }}',
+            destination: '{{ des }}',
+            {#  waypoints: [{#}
+            {#location:new google.maps.LatLng(41.7896259, -87.59479879999999),#}
+            {#stopover:true}],#}
+            travelMode:'{{ mode_option }}',
         }, function(response, status) {
-          if (status == 'OK') {
-            directionsDisplay.setDirections(response);
-			  var route = response.routes[0];
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
+            if (status == 'OK') {
+                directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
         });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
-    </script>
-  </body>
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
+</script>
+</body>
 </html>
