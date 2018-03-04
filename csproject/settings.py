@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # "geoposition",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'visual_crime.apps.VisualCrimeConfig',
     'route.apps.RouteConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
