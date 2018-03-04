@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-# from utilies_dir import algorithm
 from django.contrib import messages
 from django.shortcuts import render_to_response,redirect
 import datetime
@@ -23,15 +22,17 @@ def map(request):
     #     return render(request, 'route/index.html')
     destin = request.GET['destination']
     destin = check(destin)
-    if not destin or not origin:
-        messages.error(request, '2Error message here')
+    if not destin or not origin or (origin == destin):
+        messages.error(request, 'Please enter a valid address.')
         return HttpResponseRedirect( reverse('type') )
-    mode = request.GET['mode']
-    date = request.GET['user_date'].replace(":", ",")
-    if not date:
-        date = datetime.datetime.now().strftime('%Y,%m,%d')
-    time = request.GET['user_time'].replace(":", ",")
-    if not time:
-        time = datetime.datetime.now().strftime('%H,%M')
+    mode_option = request.GET['mode']
+    d = request.GET['user_date'].replace(":", ",")
+    if not d:
+        d = datetime.datetime.now().strftime('%Y,%m,%d')
+    t = request.GET['user_time'].replace(":", ",")
+    if not t:
+        t = datetime.datetime.now().strftime('%H,%M')
     # return render(request, 'route/map.html', {'form': form})
-    return render(request, 'route/map.html', context={"needall":[origin,destin,mode,date,time]})
+    # mydic = {'org':origin, 'des':destin, 'mode_option': mode_option}
+    # return HttpResponse(origin)
+    return render(request, 'route/map.html', {'org':origin, 'des':destin, 'mode_option': mode_option})

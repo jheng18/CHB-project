@@ -1,39 +1,23 @@
+{% extends 'home/new.html' %}
 {%  load staticfiles %}
-<link rel="stylesheet" type="text/css"
-      href="{% static 'visual_crime/css/style.css' %}"
-      xmlns:width="http://www.w3.org/1999/xhtml"/>
-<!--<link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<!DOCTYPE html>
-<html>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>visul_crime</title>
-  <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
+<style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
         height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-      }
-    </style>
+    }
+</style>
+{% block title %}{{ visual_data }}{% endblock %}
+{% block view_active %}active{% endblock %}
 
-  <head>
-  <div class="container">
-      <div class="row">
-          <div class="span3 logo" >
-              <img src="{% static "visual_crime/img/logo.gif" %}"
-              alt="logo"/ width="80%" height="80%">
-          </div>
-  </head>
-  <body>
+
+{% block body %}
     <!--<div id="googlemaps" style="width: 500px; height: 400px;"></div>-->
     <div id="googlemaps-container-top"></div>
 		<div id="googlemaps" class="google-map google-map-full"></div>
@@ -74,73 +58,4 @@
 
 			<p>hello</p>
 	</div>
-    <!-- start: Footer Menu -->
-	<div id="footer-menu" class="hidden-tablet hidden-phone">
-		<!-- start: Container -->
-		<div class="container">
-			<!-- start: Row -->
-			<div class="row">
-				<!-- start: Footer Menu Logo -->
-				<div class="span2">
-					<div id="footer-menu-logo">
-						<a href="#"><img src="{% static "visual_crime/img/logo-footer-menu.png" %}"
-              alt="logo"/ width="70%" height="70%"></a>
-					</div>
-				</div>
-				<!-- end: Footer Menu Back To Top -->
-
-			</div>
-			<!-- end: Row -->
-
-		</div>
-		<!-- end: Container  -->
-
-	</div>
-	<!-- end: Footer Menu -->
-
-	<!-- start: Footer -->
-	<div id="footer">
-
-		<!-- start: Container -->
-		<div class="container">
-
-			<!-- start: Row -->
-			<div class="row">
-
-				<!-- start: About -->
-				<div class="span13">
-
-					<h3>About Us</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-					</p>
-
-				</div>
-				<!-- end: About -->
-
-
-			</div>
-			<!-- end: Row -->
-
-		</div>
-		<!-- end: Container  -->
-
-	</div>
-	<!-- end: Footer -->
-
-	<!-- start: Copyright -->
-	<div id="copyright">
-
-		<!-- start: Container -->
-		<div class="container">
-
-			<p>
-				&copy; 2013, creativeLabs. <a href="http://bootstrapmaster.com" alt="Bootstrap Themes">Bootstrap Themes</a> designed by BootstrapMaster in Poland <img src="img/poland2.png" alt="Poland" style="margin-top:-4px">
-			</p>
-
-		</div>
-		<!-- end: Container  -->
-
-	</div>
-  </body>
-</html>
+{% endblock %}
