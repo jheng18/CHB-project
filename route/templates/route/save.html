@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'home/new.html' %}
+{%  load staticfiles %}
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+{% block title %}{{ map }}{% endblock %}
+<style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+</style>
 
-</body>
-</html>
+{% block route_active %}active{% endblock %}
+{% block body %}
+    <div id="googlemaps-container-top"></div>
+    <div id="googlemaps" class="google-map google-map-full"></div>
+    <div id="googlemaps-container-bottom"></div>
+    <script>
+
+        {#var js_list = "{{needall|safe}}";#}
+        function initMap() {
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            var directionsService = new google.maps.DirectionsService;
+            var map = new google.maps.Map(document.getElementById('googlemaps'), {
+                zoom: 13,
+                center: {lat: 41.787163518, lng: -87.593164294}
+            });
+            directionsDisplay.setMap(map);
+
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                origin: '{{ org }}',
+                destination: '{{ des }}',
+                {#  waypoints: [{#}
+                {#location:new google.maps.LatLng(41.7896259, -87.59479879999999),#}
+                {#stopover:true}],#}
+                travelMode:'{{ mode_option }}',
+            }, function(response, status) {
+                if (status == 'OK') {
+                    directionsDisplay.setDirections(response);
+                    var route = response.routes[0];
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
+    </script>
+    <div class="container">
+        <h2>Details</h2>
+{% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'visual_crime.apps.VisualCrimeConfig',
     'route.apps.RouteConfig',
     'home.apps.HomeConfig',
+    'analysis.apps.AnalysisConfig',
 ]
 
 MIDDLEWARE = [

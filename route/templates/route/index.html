@@ -1,18 +1,25 @@
-<!DOCTYPE html>
+{% extends 'home/new.html' %}
+{%  load staticfiles %}
 
-<html>
-  <head>
-    <title>Place Address Form</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <link href="file:///C|/Users/hengj/Desktop/chb-web-design/form.css" rel="stylesheet" type="text/css">
-  </head>
+{% block title %}{{ route_form }}{% endblock %}
+{% block route_active %}active{% endblock %}
+{% block body %}
+    <div id="page-title">
 
-  <body>
+        <div id="page-title-inner">
+
+            <!-- start: Container -->
+            <div class="container">
+
+                <h2><i class="ico-usd ico-white"></i>Find a safe route</h2>
+
+            </div>
+            <!-- end: Container  -->
+
+        </div>
+
+    </div>
   {% if messages %}
-
-      <h1>I am inside MESSAGES</h1>
 
       {% for message in messages %}
           {% if message.tags == 'success' %}
@@ -22,31 +29,37 @@
           {% endif %}
       {% endfor %}
   {% endif %}
-  <form action="map" method="get">
+    <div class="container">
+    <div class = 'form_only'>
+  <form action="map" method="get" >
 		  <fieldset>
-			  <legend id='kuang'><h3>Find safe route</h3></legend>
+			  <legend id='kuang'><h3>Where and when do you like to go?</h3></legend>
+              <p> Our crime data <span style="color: red">only</span> covers <span style="color: red">Hyde Park</span>, please
+                  type/choose locations that are in Hyde Park. If you can't find your destination/origin places
+                  from the drop down box, you can also free to type the destination and origin place.If you don't choose
+                  a departure date and time, we set the current time and date as default value for departure time and
+                  date.  <p>
+              <h4> From :</h4><br>
 					<input id="autocomplete1" placeholder="Origin"
-						   type="text" name="origin" ></input><br>
+						   type="text" name="origin"  style="width: 400px; margin: auto";></input><br><br>
+              <h4> To:</h4><br>
 					<input id="autocomplete2" placeholder="Destination"
-                           type="text" name ="destination"></input><br>
-			  <p>Choose mode:</p>
-					<input type="radio" name="mode" value="WALKING" checked> Walking<br>
+                           type="text" name ="destination"  style="width: 400px;margin: auto"></input><br><br>
+			  <h4>Choose mode:</h4><br>
+					<input type="radio" name="mode" value="WALKING" style="margin: auto" checked> Walking<br>
 					<input type="radio" name="mode" value="TRANSIT"> Transit<br>
                     <input type="radio" name="mode" value="DRIVING"> Driving<br>
-					<input type="radio" name="mode" value="BIKE"> Bike
-	  		  <p>Choose departure date:</p>
-	  				<select action="/example/html5/demo_form.asp" method="get">
-                        <input id="dateID" type="date"  name="user_date"/>
-					</select>
-			  <p>Choose departure time:</p>
-	  				<select action="/example/html5/demo_form.asp" method="get">
-    				 <input type="time" name="user_time"/>
-					</select><br><br>
+					<input type="radio" name="mode" value="BIKE"> Bicycle<br><br>
+	  		  <h4>Choose departure date:</h4><br>
+                    <input id="dateID" type="date"  name="user_date"  method="get"><br><br>
+			  <h4>Choose departure time:</h4><br>
+    				 <input type="time" name="user_time"  method="get"><br><br>
 	  		<input type="submit" value="Submit">
 	      </fieldset>
 
 	  </form>
-
+    </div>
+    </div>
     <script>
       var autocomplete1,autocomplete2;
 	  var defaultBounds = new google.maps.LatLngBounds(
@@ -75,23 +88,8 @@
 		autocomplete1.setBounds(defaultBounds);
 		autocomplete2.setBounds(defaultBounds);
       }
-      // Reference: http://jsfiddle.net/jdb12f5t/
-      var dtToday = new Date();
-      var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
-      var day = dtToday.getDate();
-      var year = dtToday.getFullYear();
-      if(month < 10)
-          month = '0' + month.toString();
-      if(day < 10)
-          day = '0' + day.toString();
-
-      var maxDate = year + '-' + month + '-' + day;
-      $('#dateID').attr('max', maxDate);
-
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&libraries=places&callback=initAutocomplete"
         async defer></script>
-
-  </body>
-</html>
+{% endblock %}

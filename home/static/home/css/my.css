@@ -147,3 +147,7 @@ header {
 .icons-box p {
     float: center;
 }
+.form_only{
+    margin: 10px;
+    text-align: center;
+}
