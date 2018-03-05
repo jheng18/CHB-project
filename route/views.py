@@ -3,21 +3,20 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import render_to_response,redirect
-import datetime
-from route.checkplace import *
+import datetime, json
 # from .models import PointOfInterest
 from django.urls import reverse
 from django import forms
 from django.contrib import messages
 
-# from route.Choose_safest_route import *
+from route.checkplace import *
+
+
 from route.Compute_crime_weights import *
 # from route.main import *
 from route.Subset_date_by_time import *
 
 import route.Choose_safest_route as csr
-
-
 
 
 
@@ -27,6 +26,9 @@ def index(request):
 def map(request):
     origin = request.GET['origin']
     origin = check(origin)
+    # if not origin:
+    #     messages.error(request, 'error')
+    #     return render(request, 'route/index.html')
     destin = request.GET['destination']
     destin = check(destin)
     if not destin or not origin or (origin == destin):
@@ -46,11 +48,22 @@ def map(request):
         if t < right_moment:
             t = right_moment
     t = t[0].strip('0') + t[1:]
-    depart_time = csr.input_date_time(d, t)
-    loc_weight = csr.get_crime_time_df(t)
-    return render_template("map.html", name=filename, data=loc_weight)
-    # route_dict = csr.build_route_dict(origin, destin, depart_time, mode_option)
-    # instruction_dict = csr.build_instruction_ls(origin, destin, depart_time,mode_option)
-    # long_route_dict = csr.enrich_routes_steps(route_dict)
-    # return HttpResponse(loc_weight)
+    pts1 = [41.7913967, -87.5993036,41.791614, -87.5991562,41.7921284, -87.59884919999999,41.7923414, -87.5985792,
+            41.7921284, -87.59884919999999,41.7916146, -87.5988321,41.7914052, -87.59854109999999,
+            41.7914235, -87.59645069999999,41.7923444, -87.596471,41.7932285, -87.59813009999999,
+            41.7932285, -87.59713009999999,41.7932285, -87.59613009999998,41.7932285, -87.59513009999998,
+            41.7932285, -87.59413009999997,41.7932285, -87.59313009999997,41.7932285, -87.59213009999996,
+            41.7932285, -87.59113009999996,41.7932285, -87.59013009999995,41.7932285, -87.58913009999995,
+            41.7932285, -87.58813009999994,41.7933449, -87.5878748,41.7943449, -87.5878748,
+            41.795344899999996, -87.5878748,41.796344899999994, -87.5878748,41.79734489999999, -87.5878748,
+            41.79834489999999, -87.5878748,41.79934489999999, -87.5878748,41.800344899999985, -87.5878748,
+            41.80134489999998, -87.5878748,41.80234489999998, -87.5878748,41.8024679, -87.58778459999999,
+            41.8024679, -87.58678459999999,41.8024679, -87.58578459999998,41.8024867, -87.58532489999999,
+            41.8034867, -87.58532489999999,]
+
+    route_option = 1
+    mode_option = mode_option.swapcase()
+    # return HttpResponse(pts1[0])
     # return render(request, 'route/map.html', {'org':origin, 'des':destin, 'mode_option': mode_option})
+    return render(request, 'route/map.html', {'org':origin, 'des':destin, 'mode_option': mode_option, 'pts':pts1,
+                                              'route_option': route_option})
