@@ -34,42 +34,49 @@
     <div id="googlemaps-container-top"></div>
     <div id="googlemaps" class="google-map google-map-full"></div>
     <div id="googlemaps-container-bottom"></div>
-<script>
+    <script>
+        function initMap() {
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            var directionsService = new google.maps.DirectionsService;
+            var map = new google.maps.Map(document.getElementById('googlemaps'), {
+                zoom: 13,
+                center: {lat: 41.787163518, lng: -87.593164294}
+            });
+            directionsDisplay.setMap(map);
 
-    {#var js_list = "{{needall|safe}}";#}
-    function initMap() {
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        var map = new google.maps.Map(document.getElementById('googlemaps'), {
-            zoom: 13,
-            center: {lat: 41.787163518, lng: -87.593164294}
-        });
-        directionsDisplay.setMap(map);
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
 
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-    };
+        function wpt(){
+            var want = [];
+            var wpt_origin = {{ pts }};
+            while (wpt_origin.length > 0){
+                stop = new google.maps.LatLng(wpt_origin[0], wpt_origin[1])
+                want.push({location: stop, stopover: true});
+                wpt_origin.splice(0,2);
+            };
+            return want
+        }
 
-    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        directionsService.route({
-            origin: '{{ org }}',
-            destination: '{{ des }}',
-            {#  waypoints: [{#}
-            {#location:new google.maps.LatLng(41.7896259, -87.59479879999999),#}
-            {#stopover:true}],#}
-            travelMode:'{{ mode_option }}',
-        }, function(response, status) {
-            if (status == 'OK') {
-                directionsDisplay.setDirections(response);
-                var route = response.routes[0];
-            } else {
-                window.alert('Directions request failed due to ' + status);
-            }
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
-</script>
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                origin: '{{ org }}',
+                destination: '{{ des }}',
+                waypoints: wpt(),
+                travelMode:'{{ mode_option }}',
+            }, function(response, status) {
+                if (status == 'OK') {
+                    directionsDisplay.setDirections(response);
+                    var route = response.routes[{{ mode_option }}];
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
+    </script>
     <div class="container">
         <h2>Details</h2>
 {% endblock %}

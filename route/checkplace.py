@@ -9,7 +9,7 @@ zip_ = ['60637', '60615', '60649']
 
 def check(input):
     if input == '':
-        return None
+        return None,None
     else:
         latlng =  gmaps.geocode(input)
         if latlng != []:
@@ -19,11 +19,12 @@ def check(input):
                 if latlng:
                     lat,lgt = latlng[0]['geometry']['location']['lat'],latlng[0]['geometry']['location']['lng']
                     if down<lat<top and left<lgt<right:
-                        return latlng[0]['formatted_address']
+                        return latlng[0]['formatted_address'],[lat,lgt]
                     else:
-                        return None
+                        return None,None
             else:
-                 return latlng[0]['formatted_address']
+                 return latlng[0]['formatted_address'],[latlng[0]['geometry']['location']['lat'],
+                                                        latlng[0]['geometry']['location']['lng']]
 
         else:
-            return None
+            return None,None
