@@ -43,10 +43,8 @@
                 center: {lat: 41.787163518, lng: -87.593164294}
             });
             directionsDisplay.setMap(map);
-
             calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
-
         function wpt(){
             var want = [];
             var wpt_origin = {{ pts }};
@@ -57,17 +55,16 @@
             };
             return want
         }
-
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             directionsService.route({
                 origin: '{{ org }}',
                 destination: '{{ des }}',
                 waypoints: wpt(),
                 travelMode:'{{ mode_option }}',
+                provideRouteAlternatives: true,
             }, function(response, status) {
                 if (status == 'OK') {
-                    directionsDisplay.setDirections(response);
-                    var route = response.routes[{{ mode_option }}];
+                    directionsDisplay.setOptions({directions:response,routeIndex:{{route_option}}});
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }
