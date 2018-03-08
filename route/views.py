@@ -10,9 +10,7 @@ from django import forms
 from django.contrib import messages
 from route.checkplace import *
 from route.Compute_crime_weights import *
-# from route.main import *
 from route.Subset_date_by_time import *
-
 import route.Choose_safest_route as csr
 
 
@@ -38,55 +36,38 @@ def map(request):
         org_geo = check(origin)[1]
         des_geo = check(destin)[1]
     mode_option = request.GET['mode']
-    d = request.GET['user_date'].replace("-", ",")
+    user_date = request.GET['user_date'].replace("-", ",")
     today = datetime.datetime.now().strftime('%Y,%m,%d')
-    t = request.GET['user_time'].replace(":", ",")
+    user_time = request.GET['user_time'].replace(":", ",")
     right_moment = datetime.datetime.now().strftime('%H,%M')
-    if not t:
-        t = right_moment
-    if not d:
-        d = today
-    if d < today:
-        d = today
-        if t < right_moment:
-            t = right_moment
-    t = t[0].strip('0') + t[1:]
-    mode_option = mode_option.swapcase()
-    # pts = []
-    route_option = 1
+    if not user_time:
+        user_time = right_moment
+    if not user_date:
+        user_date = today
+    if user_date < today:
+        user_date = today
+        if user_time < right_moment:
+            user_time = right_moment
+    user_time = user_time[0].strip('0') + user_time[1:]
+
     pts = org_geo
-    pts += [41.7913123,
-            -87.6061636,
-            41.7913123,
-            -87.6051636,
-            41.7913123,
-            -87.60416359999999,
-            41.7913123,
-            -87.60316359999999,
-            41.791358,
-            -87.60249639999999,
-            41.7909978,
-            -87.6024699,
-            41.7899978,
-            -87.6024699,
-            41.7894855,
-            -87.6015256,
-            41.7892259,
-            -87.60152049999999,
-            41.7892299,
-            -87.60072249999999,
-            41.788229900000005,
-            -87.60072249999999,
-            41.78774200000001,
-            -87.6005843,
-            41.78774200000001,
-            -87.59958429999999,
-            41.7877494,
-            -87.59957589999999]
+    depart_time = csr.input_date_time(user_date, user_time)
+    loc_weight = csr.get_crime_time_df(user_time)
+    ori_loc = origin
+    des_loc = destin
+    google_route_dict = csr.build_route_dict(ori_loc, des_loc, depart_time, mode_option)
+    instruction_dict = csr.build_instruction_dict(ori_loc, des_loc, depart_time, mode_option)
+    enriched_route_dict = csr.enrich_routes_steps(google_route_dict)
+    best_choice, google_route, enriched_route = csr.get_best_route(loc_weight, google_route_dict, enriched_route_dict)
+    google_each_step_score = csr.get_each_step_score(loc_weight, google_route)
+    enriched_each_step_score = csr.get_each_step_score(loc_weight, enriched_route)
+    altered_route = csr.find_alternative_step(enriched_each_step_score, depart_time, mode_option, loc_weight)
+    final_route = csr.get_route_for_map(google_route, enriched_route, altered_route)
+    google_route_ls = csr.transfer_tuple_to_list(google_route)
+    enriched_route_ls = csr.transfer_tuple_to_list(enriched_route)
+    altered_route_ls = csr.transfer_tuple_to_list(altered_route)
+    final_route_ls = csr.transfer_tuple_to_list(final_route)
+    pts += final_route_ls
     pts += des_geo
-    # return HttpResponse(pts)
-    # return render(request, 'route/map.html', {'org':origin, 'des':destin, 'mode_option': mode_option})
-    # return render(request, 'route/map.html', {'org':origin, 'des':destin, 'mode_option': mode_option, 'pts':pts,
-    #                                         'route_option': route_option})
-    # return render(request, 'route/map.html', {'pts':pts, 'mode_option': mode_option})
-    return render(request, 'route/map.html', {'pts':pts})
+    mode_option = mode_option.swapcase()
+    return render(request, 'route/map.html', {'pts':pts,'mode_option': mode_option})
