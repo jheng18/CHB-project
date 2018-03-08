@@ -1,0 +1,74 @@
+{% extends 'home/new.html' %}
+{%  load staticfiles %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{% block title %}{{ analysis }}{% endblock %}
+{% block analysis_active %}active{% endblock %}
+{% block body %}
+    <div id="page-title">
+        <div id="page-title-inner">
+            <div class="container">
+                <h2><i class="ico-usd ico-white"></i>Crime Data Analysis</h2>
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "container">
+            <h3 style="font-size: 20px">
+            Below is the data analysis
+        </h3>
+            <table style="width:100%">
+                <tr>
+                    <td><img id="imgtab1" class='small' src="{% static "home/img/ana1.png" %}"></td>
+                    <td><h4>This is data analysis.</h4></td>
+                </tr>
+                <tr>
+                    <td><img id="imgtab2" class='small' src="{% static "home/img/ana2.png" %}" ></td>
+                    <td><h4>This is data analysis.</h4></td>
+                </tr>
+                <tr>
+                    <td><img id="imgtab3" class='small' src="{% static "home/img/ana3.png" %}"></td>
+                    <td><h4>This is data analysis.</h4></td>
+                </tr>
+                <tr>
+                    <td><img id="imgtab4" class='small' src="{% static "home/img/ana4.png" %}"></td>
+                    <td><h4>This is data analysis.</h4></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        {# Reference: https://stackoverflow.com/questions/37146565/make-an-image-bigger-on-click-and-go-back-to-#}
+        {# small-on-second-clic#}
+        var small={width: "300px",height: "174px"};
+        var large={width: "700px",height: "600px"};
+        $(document).ready(function () {
+            var count=1;
+            $("#imgtab1").css(small).on('click',function () {
+                $(this).animate((count==1)?large:small);
+                count = 1-count;
+            });
+        });
+        $(document).ready(function () {
+            var count=1;
+            $("#imgtab2").css(small).on('click',function () {
+                $(this).animate((count==1)?large:small);
+                count = 1-count;
+            });
+        });
+        $(document).ready(function () {
+            var count=1;
+            $("#imgtab3").css(small).on('click',function () {
+                $(this).animate((count==1)?large:small);
+                count = 1-count;
+            });
+        });
+        $(document).ready(function () {
+            var count=1;
+            $("#imgtab4").css(small).on('click',function () {
+                $(this).animate((count==1)?large:small);
+                count = 1-count;
+            });
+        });
+    </script>
+
+{% endblock %}
