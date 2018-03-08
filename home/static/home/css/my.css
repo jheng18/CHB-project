@@ -19,6 +19,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
+
 header {
     background: #fff;
     border-bottom: 5px solid #f6f6f6;
@@ -30,7 +31,7 @@ header {
     width: 19.5%;
     height: 25%;
     margin-right: 20px;
-    margin-top: 3px;
+    margin-top: 10px;
 }
 
 .navbar,
@@ -84,7 +85,7 @@ header {
     position: relative;
     margin: 0 auto;
     overflow: hidden;
-    background: transparent url(../img/uc.png) repeat 0% 0%;
+    background: transparent url(../img/uc.PNG) repeat 0% 0%;
     border-bottom: 5px solid #f6f6f6 !important;
     -webkit-box-shadow: inset 0px 0px 5px rgba(0,0,0,.25);
     -moz-box-shadow: inset 0px 0px 5px rgba(0,0,0,.25);
@@ -128,7 +129,6 @@ header {
     background: #fff url(../img/bg-k10.png);
     border-left: 4px solid #800000;
     padding: 13px 13px 13px 15px;
-    font-style: italic;
     margin: 20px auto;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
@@ -150,4 +150,7 @@ header {
 .form_only{
     margin: 10px;
     text-align: center;
+}
+.form_only p {
+    font-size: 30px;
 }
