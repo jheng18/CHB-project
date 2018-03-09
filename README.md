@@ -5,7 +5,9 @@
 
 Each members' role and responsibilities:
 
-- 
+-  Data: Chen Bao
+
+
 
 -  Algorithm: Xi Chen
    
@@ -20,7 +22,7 @@ Each members' role and responsibilities:
    Get_route_for_map.py
    
 
-- 
+- Website: Jie Heng
 
 
 
