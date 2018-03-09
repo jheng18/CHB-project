@@ -3,6 +3,14 @@
 ## Xi Chen, Jie Heng, and Chen Bao
 
 
+Each members' role and responsibilities:
+
+- 
+
+- 
+
+- 
+
 Algorithm:
 
 1. Download the folder "route"
