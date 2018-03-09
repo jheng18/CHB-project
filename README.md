@@ -1,15 +1,29 @@
 # CS122 project
 # CHB Group
-## Xi Chen, Jie Heng, and Chen Bao
+## Xi Chen, Jie Heng, Chen Bao
 
 
 Each members' role and responsibilities:
 
 - 
 
-- 
+-  Algorithm: Xi Chen
+   
+   The codes are in the "route" folder, including
+   
+   Compute_crime_weights.py
+   
+   Subset_date_by_time.py
+   
+   Choose_safest_route.py
+   
+   Get_route_for_map.py
+   
 
 - 
+
+
+
 
 Algorithm:
 
