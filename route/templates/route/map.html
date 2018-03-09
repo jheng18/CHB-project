@@ -2,47 +2,34 @@
 {%  load staticfiles %}
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 {% block title %}{{ map }}{% endblock %}
-<style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    #map {
-        height: 100%;
-        width: 100%;
-        height: 100%;
-    }
-</style>
 {% block route_active %}active{% endblock %}
 {% block body %}
-<div id="googlemaps-container-top"></div>
-<div id="googlemaps" class="google-map google-map-full"></div>
-<div id="googlemaps-container-bottom"></div>
-<script async defer src=
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
-
-</script>
-<script><!-- without API KEY set variable "max" to 8 -->
+    <div id="googlemaps-container-top"></div>
+    <div id="googlemaps" class="google-map google-map-full"></div>
+    <div id="googlemaps-container-bottom"></div>
+    <script async defer src=
+            "https://maps.googleapis.com/maps/api/js?key=AIzaSyChS_xnOZ7MVdUYBgkL3b79x_WHCmggUgI&callback=initMap">
+    </script>
+    <script>
+    // Reference:
+    // https://stackoverflow.com/questions/8779886/exceed-23-waypoint-per-request-limit-on-google-directions-api-
+    // business-work-lev
     function initMap() {
         var service = new google.maps.DirectionsService;
         var map = new google.maps.Map(document.getElementById("googlemaps"));
 
+        // Get waypoints for routes
         function wpt(){
             var stations = [];
             var wpt_origin = {{ pts }};
             while (wpt_origin.length > 0){
-                stations.push({lat: wpt_origin[0], lng: wpt_origin[1]});
+                stations.push({lat: wpt_origin[0], lng: wpt_origin[1], name:'station'});
                 wpt_origin.splice(0,2);
             };
-            stations[0]['name'] = 'start';
-            stations[stations.length-1]['name'] = 'end';
             return stations
         };
-        // list of points
-        var stations = wpt();
 
-        // Zoom and center map automatically by stations (each station will be in visible map area)
+        var stations = wpt();
         var lngs = stations.map(function(station) { return station.lng; });
         var lats = stations.map(function(station) { return station.lat; });
 
@@ -82,22 +69,23 @@
 
         // Send requests to service to get route (for stations count <= 25 only one request will be sent)
         for (var i = 0; i < parts.length; i++) {
-            // Waypoints does not include first station (origin) and last station (destination)
+                // Waypoints does not include first station (origin) and last station (destination)
             var waypoints = [];
             for (var j = 1; j < parts[i].length - 1; j++)
                 waypoints.push({location: parts[i][j], stopover: false});
-            // Service options
-            var service_options = {
-                origin: parts[i][0],
-                destination: parts[i][parts[i].length - 1],
-                waypoints: waypoints,
-                travelMode: 'WALKING'
-            };
-            // Send request
+                // Service options
+                var service_options = {
+                    origin: parts[i][0],
+                    destination: parts[i][parts[i].length - 1],
+                    waypoints: waypoints,
+                    travelMode: '{{ mode_option }}'
+                };
+                // Send request
             service.route(service_options, service_callback);
+            }
         }
-    }
-</script>
+    </script>
     <div class="container">
-    <h2>Details</h2>
+    <p><font size="3">You can use ctrl+scroll to zoom the map. Our route avoids dangerous areas. Red markers are used to display the
+        route.</font></p>
 {% endblock %}
