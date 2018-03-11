@@ -32,15 +32,15 @@
 
 ### An sample run for the the Algorithm codes:
 
-1. Create a folder called "route"; in the "route" folder, create a folder called "Data"; put the "final_data.csv" into the "Data" folder.
+1. Create a folder called "route", save the four algorithm's python files in this folder; Then, create a folder called "Data" inside the "route" folder, put the "final_data.csv" into this "Data" folder.
 
-2. In the VM, go to the directory where the four algorithm's python files you saved, run the following two commands:
+2. In the VM, go to the directory ".../route", run the following two commands:
    
    python Compute_crime_weights.py
    
    python Subset_date_by_time.py
    
-   After executing these two commands, in the "Data" folder, twenty-five new csv files will be created: one is called "data_with_weight.csv", and the other are the subsets of the crime data according to twenty-four hours.
+   The second command takes about 15 seconds. After executing these two commands, in the "Data" folder, twenty-five new csv files will be created: one is called "data_with_weight.csv", and the other are the subsets of the crime data according to twenty-four hours.
 
 3. In the VM, install the google map package by running the following commands:
 
