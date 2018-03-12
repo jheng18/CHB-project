@@ -34,14 +34,14 @@ This is the original CSV file we downloaded from City of Chicago Data Portal (la
 ###  02 Algorithm: Xi Chen
    
    In the "02 Algorithm" folder, there are four python codes:
+
+##### Compute_crime_weights.py
+
+##### Subset_date_by_time.py
    
-   Compute_crime_weights.py
+##### Choose_safest_route.py
    
-   Subset_date_by_time.py
-   
-   Choose_safest_route.py
-   
-   Get_route_for_map.py
+##### Get_route_for_map.py
   
 #### An sample run for the the Algorithm codes:
 
