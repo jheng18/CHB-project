@@ -78,3 +78,5 @@ Data_viz.py
    
    
 ### Website: Jie Heng
+
+   The github is the root folder for websites. Apps: route, home, analysis, visual_crime are in the folders with the same name. To run website, please download all files and folders from the github, run '$ python manage.py runserver'. And go to your webserver. The http address is: http://127.0.0.1:8000/home. 
