@@ -8,8 +8,6 @@ from django.urls import reverse
 from django import forms
 from django.contrib import messages
 from route.checkplace import *
-from route.Compute_crime_weights import *
-from route.Subset_date_by_time import *
 import route.Choose_safest_route as csr
 
 
