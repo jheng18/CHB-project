@@ -11,7 +11,7 @@
 
 ####  Algorithm: Xi Chen
    
-   The codes are in the "route" folder, including
+   The codes are in the "Algorithm" folder, including four python codes:
    
    Compute_crime_weights.py
    
