@@ -5,7 +5,7 @@
 
 ### Each member' role and codes:
 
-####  Data: Chen Bao
+###  Data: Chen Bao
 
 Files including in the data preparation folder including:
 
@@ -38,9 +38,10 @@ Data_viz.py
 •	Use Python Seaborn package to create data visualizations and perform data analysis 
 
 
-####  Algorithm: Xi Chen
+
+###  Algorithm: Xi Chen
    
-   The codes are in the "Algorithm" folder, including four python codes:
+   In the "02 Algorithm" folder, there are four python codes:
    
    Compute_crime_weights.py
    
@@ -49,27 +50,20 @@ Data_viz.py
    Choose_safest_route.py
    
    Get_route_for_map.py
-   
+  
+#### An sample run for the the Algorithm codes:
 
-#### Website: Jie Heng
+1. Download the four python codes above from the "02 Algorithm" folder, and download the "final_data.csv" from the "Data" folder inside the "02 Algorithm" folder.
 
+2. In your computer, create a folder called "Algorithm", save the four algorithm's python files in this folder; inside the "Algorithm" folder, create a folder called "Data", save the "final_data.csv" in this folder.
 
-
-
-
-
-
-### An sample run for the the Algorithm codes:
-
-1. Create a folder called "route", put the four algorithm's python files in this folder; inside the "route" folder, create a folder called "Data", put the "final_data.csv" into this folder.
-
-2. In the VM, go to the directory ".../route", run the following two commands:
+3. In the VM, go to the directory "./Algorithm", run the following two commands:
    
    python Compute_crime_weights.py
    
    python Subset_date_by_time.py
    
-   The second command takes about 15 seconds. After executing these two commands, in the "Data" folder, twenty-five new csv files will be created: one is called "data_with_weight.csv", and the other are the subsets of the crime data according to twenty-four hours.
+   The second command takes about 45 seconds. After executing these two commands, in the "Data" folder, twenty-five new csv files will be created: one is called "data_with_weight.csv", and the other are the subsets of the crime data according to twenty-four hours.
 
 3. In the VM, install the google map package by running the following commands:
 
@@ -82,3 +76,5 @@ Data_viz.py
    There are several outputs which show different versions of the route in the process of the algorithm. You can change the user's inputs to have another sample test. There is one important thing that needs be kept in mind, when entering the departure date and time, the user has to enter an future date and time, or at least the current date/time, because the Google Map API would only accept the future or at least current date and time. 
    
    
+   
+### Website: Jie Heng
