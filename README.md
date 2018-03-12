@@ -15,7 +15,7 @@ Crimes_2001_to_present.scv
 
 Modify_csv_data.py 
 
-•	Read in the original data file and prepare the data for future used 
+•	Read in the original data file and format the data for future use
 
 Get_Security_Alert.py 
 
