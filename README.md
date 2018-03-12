@@ -8,25 +8,25 @@
 
 Data prep and visualization folder contains files including:
 
-Crimes_2001_to_present.scv
-      This is the original CSV file we downloaded from City of Chicago Data Portal (last updated on Feb 20th), dataset reflects reported        incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2001 to present
+##### Crimes_2001_to_present.scv
+This is the original CSV file we downloaded from City of Chicago Data Portal (last updated on Feb 20th), dataset reflects reported        incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2001 to present
 
-Modify_csv_data.py 
+##### Modify_csv_data.py 
       Read in the original data file and format the data for future use
 
-Get_Security_Alert.py 
+##### Get_Security_Alert.py 
       Crawl data from University of Chicago security alerts archive
 
-FBI_Code.py
+##### FBI_Code.py
       Crawl data from Chicago Police Department Clear Map Crime Summary 
 
-Merge_two_dataset.py 
+##### Merge_two_dataset.py 
       Merge data output from Modify_csv_data.py and Get_Security_Alert.py 
 
-Convert_to_dict.py
+##### Convert_to_dict.py
       Convert the output from Modify_csv_data.py into a dictionary and export as json file
 
-Data_viz.py 
+##### Data_viz.py 
       Use Python Seaborn package to create data visualizations and perform data analysis 
 
 
