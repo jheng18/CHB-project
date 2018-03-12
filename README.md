@@ -1,45 +1,37 @@
 # CS122 project
 # CHB Group
+
 ## Xi Chen, Jie Heng, Chen Bao
 
 
-### Each member' role and codes:
+###  01 Data Prep and Visualization: Chen Bao 
 
-###  Data: Chen Bao
-
-Files including in the data preparation folder including:
+Data prep and visualization folder contains files including:
 
 Crimes_2001_to_present.scv
-
-•	This is the original CSV file we downloaded from City of Chicago Data Portal (last updated on Feb 20th), dataset reflects reported incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2001 to present
+      This is the original CSV file we downloaded from City of Chicago Data Portal (last updated on Feb 20th), dataset reflects reported        incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2001 to present
 
 Modify_csv_data.py 
-
-•	Read in the original data file and format the data for future use
+      Read in the original data file and format the data for future use
 
 Get_Security_Alert.py 
-
-•	Crawl data from University of Chicago security alerts archive
+      Crawl data from University of Chicago security alerts archive
 
 FBI_Code.py
-
-•	Crawl data from Chicago Police Department Clear Map Crime Summary 
+      Crawl data from Chicago Police Department Clear Map Crime Summary 
 
 Merge_two_dataset.py 
-
-•	Merge data output from Modify_csv_data.py and Get_Security_Alert.py 
+      Merge data output from Modify_csv_data.py and Get_Security_Alert.py 
 
 Convert_to_dict.py
-
-•	Convert the output from Modify_csv_data.py into a dictionary and export as json file
+      Convert the output from Modify_csv_data.py into a dictionary and export as json file
 
 Data_viz.py 
-
-•	Use Python Seaborn package to create data visualizations and perform data analysis 
-
+      Use Python Seaborn package to create data visualizations and perform data analysis 
 
 
-###  Algorithm: Xi Chen
+
+###  02 Algorithm: Xi Chen
    
    In the "02 Algorithm" folder, there are four python codes:
    
@@ -78,5 +70,3 @@ Data_viz.py
    
    
 ### Website: Jie Heng
-
-   The github is the root folder for websites. Apps: route, home, analysis, visual_crime are in the folders with the same name. To run website, please download all files and folders from the github, run '$ python manage.py runserver'. And go to your webserver. The http address is: http://127.0.0.1:8000/home. 
